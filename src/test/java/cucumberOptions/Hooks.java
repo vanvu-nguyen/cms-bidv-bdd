@@ -33,7 +33,7 @@ public class Hooks {
                     browser = System.getenv("BROWSER");
                     if (browser == null) {
                         // Set default browser
-                        browser = "chrome";
+                        browser = "firefox";
                     }
                 }
 
@@ -65,7 +65,7 @@ public class Hooks {
                         driver = new InternetExplorerDriver();
                         break;
                     default:
-                        driver = new ChromeDriver();
+                        driver = new FirefoxDriver();
                         break;
                 }
                 // Browser crash/ stop
@@ -76,7 +76,8 @@ public class Hooks {
             }
 
             driver.get(GlobalConstants.DEV_ADMIN_URL);
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
+            driver.manage().window().maximize();
             log.info("------------- Started the browser -------------");
         }
         return driver;
